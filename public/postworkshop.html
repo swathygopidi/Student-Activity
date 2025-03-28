@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post Workshop</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Post Workshop</h2>
+        <form id="workshopForm">
+            <div class="form-group">
+                <label for="workshopName">Workshop Name:</label>
+                <input type="text" id="workshopName" name="workshopName" required>
+            </div>
+            <div class="form-group">
+                <label for="workshopDate">Date:</label>
+                <input type="date" id="workshopDate" name="workshopDate" required>
+            </div>
+            <div class="form-group">
+                <label for="college">College:</label>
+                <input type="text" id="college" name="college" required>
+            </div>
+            <div class="form-group">
+                <label for="venue">Venue:</label>
+                <input type="text" id="venue" name="venue" required>
+            </div>
+            <div class="form-group">
+                <label for="registrationLink">Link to Register:</label>
+                <input type="url" id="registrationLink" name="registrationLink" required>
+            </div>
+            <div class="form-group">
+                <label for="registrationAmount">Registration Amount:</label>
+                <input type="number" id="registrationAmount" name="registrationAmount" required>
+            </div>
+            
+            <button type="submit">Post Workshop</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById("workshopForm").addEventListener("submit", async function(event) {
+            event.preventDefault();
+
+            const userLoggedIn = localStorage.getItem('userLoggedIn');
+            if (!userLoggedIn) {
+                alert("You must be logged in to post a workshop. Please log in or register.");
+                window.location.href = 'login.html'; // Redirect to login page
+                return;
+            }
+
+            const workshopName = document.getElementById("workshopName").value;
+            const workshopDate = document.getElementById("workshopDate").value;
+            const college = document.getElementById("college").value;
+            const venue = document.getElementById("venue").value;
+            const registrationLink = document.getElementById("registrationLink").value;
+            const registrationAmount = document.getElementById("registrationAmount").value;
+
+            try {
+                const response = await fetch("http://localhost:3000/post_workshop", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ workshopName, workshopDate, college, venue, registrationLink, registrationAmount })
+                });
+
+                const data = await response.json();
+                alert(data.message);
+                if (data.success) {
+                    window.location.href = 'index.html'; // Redirect after successful post
+                }
+
+            } catch (error) {
+                alert("Server error. Please try again later.");
+            }
+        });
+
+    </script>
+</body>
+</html>

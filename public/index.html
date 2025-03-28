@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Activities Portal</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <div class="title-container">
+      <center>
+        <h1>TELANGANA TRIBAL WELFARE RESIDENTIAL INSTITUTIONS</h1>
+      </center>
+    </div>
+
+    <div class="logo-marquee-container middle-in-the-web-page">
+      <img src="naac.jfif" alt="naac middle in the page" class="naac-marquee">
+    </div>
+
+    <header>
+      <div class="logo">
+        <center>
+          <h1>Student Activity And Information</h1>
+        </center>
+        <br><br>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="">Home</a></li>
+          <li><a href="aboutus.html">About Us</a></li>
+          <li class="dropdown">
+            <a href="#seminars">Seminars</a>
+            <ul class="dropdown-content">
+              <li><a href="#" onclick="loadSeminarsByCategory('sciences')">Sciences</a></li>
+              <li><a href="#" onclick="loadSeminarsByCategory('technology')">Technology</a></li>
+              <li><a href="#" onclick="loadSeminarsByCategory('web-development')">Web Development</a></li>
+              <li><a href="#" onclick="loadSeminarsByCategory('robotics')">Robotics</a></li>
+              <li><a href="#" onclick="checkLoginAndPostSeminar()">Post Seminar</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+          <a href="#" onclick="loadWorkshops()">Workshops</a>
+          <ul class="dropdown-content">
+            <li><a href="#"  onclick="checkLoginAndPostWorkshop()">Post workshop</a></li>
+            </ul>
+            </li>
+          <li><a href="#blog">Blog</a></li>
+          <li><a href="#">Rewards</a></li>
+          <li><a href="#">Feedback</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a id="loginLogoutLink" href="login.html" class="btn" id="loginButton">Login</a></li>
+          <li><a href="signup.html" class="btn" id="signupButton">Sign Up</a></li>
+          <a href="#" class="btn" id="logoutButton" style="display: none;">Logout</a>
+          <span id="usernameDisplay" style="display: none;"></span>
+        </ul>
+      </nav>
+    </header>
+
+    
+    <section id="seminars">
+      <h2>Upcoming Seminars</h2>
+      <div id="seminar-list">
+        </div>
+    </section>
+    <section id="Workshops">
+      <h2>Upcoming Workshops</h2>
+      <div id="workshop-list">
+        </div>
+    </section>
+
+
+    <footer id="contact">
+      <p>&copy; 2025 Student Activities Portal. All rights reserved.</p>
+    </footer>
+  </div>
+
+  <script>
+    window.onload = function() {
+  checkLoginStatus(); // Call checkLoginStatus on page load
+};
+
+function logout() {
+  localStorage.removeItem('userLoggedIn');
+  localStorage.removeItem('username');
+  window.location.href = 'index.html';
+}
+
+function checkLoginStatus() {
+  const username = localStorage.getItem('username');
+  const loginLogoutLink = document.getElementById('loginLogoutLink');
+
+  if (username) {
+    loginLogoutLink.textContent = username + ' (Logout)';
+    loginLogoutLink.href = '#';
+    loginLogoutLink.onclick = logout;
+    document.getElementById('signupButton').style.display = 'none'; //hide signup
+  } else {
+    loginLogoutLink.textContent = 'Login';
+    loginLogoutLink.href = 'login.html';
+    loginLogoutLink.onclick = null;
+    document.getElementById('signupButton').style.display = 'inline'; //show signup
+  }
+}
+    
+    // Function to check if the user is logged in
+    function checkLoginAndPostSeminar() {
+      const userLoggedIn = localStorage.getItem('userLoggedIn');
+
+      if (!userLoggedIn) {
+        // If the user is not logged in, redirect to login page
+        alert('Please log in to post a seminar.');
+        localStorage.setItem('redirectAfterLogin', 'post-seminar.html'); // Store the redirect target
+        window.location.href = 'login.html'; // Redirect to login page
+      } else {
+        // If logged in, redirect to post seminar page
+        window.location.href = 'postseminar.html'; // Change to the actual URL of the Post Seminar page
+      }
+    }
+
+    // Function to handle form submission for posting a seminar
+    function postSeminar() {
+      // Here, you would add the functionality to handle seminar posting
+      // Make sure the user is logged in before allowing the seminar posting
+      const userLoggedIn = localStorage.getItem('userLoggedIn');
+      if (!userLoggedIn) {
+        alert('You must be logged in to post a seminar.');
+        window.location.href = 'login.html'; // Redirect to login page
+        return;
+      }
+
+      // Proceed with posting seminar (e.g., send data to the server)
+      alert('Seminar posted successfully!');
+      // Further seminar posting logic goes here...
+    }
+
+    // Function to fetch and display seminars by category
+    function loadSeminarsByCategory(category) {
+      fetch(`/get-seminars-by-category?category=${category}`)
+        .then(response => response.json())
+        .then(data => {
+          const seminarList = document.getElementById('seminar-list');
+          seminarList.innerHTML = ''; // Clear existing content
+
+          if (data.success && data.seminars.length > 0) {
+            data.seminars.forEach(seminar => {
+              const seminarDiv = document.createElement('div');
+              seminarDiv.classList.add('seminar-item');
+              seminarDiv.innerHTML = `
+                <h3>${seminar.seminar_topic}</h3>
+                <p><strong>College:</strong> ${seminar.college_name}</p>
+                <p><strong>Category:</strong> ${seminar.seminar_category}</p>
+                <p><strong>Date:</strong> ${new Date(seminar.seminar_date).toLocaleDateString()}</p>
+                <p><strong>Venue:</strong> ${seminar.seminar_venue}</p>
+                <a href="/uploads/${seminar.brochure}" target="_blank">Download Brochure</a>
+                <img src="/uploads/${seminar.seminar_image}" alt="Seminar Image" style="width: 100px; height: 100px;">
+              `;
+              seminarList.appendChild(seminarDiv);
+            });
+          } else {
+            seminarList.innerHTML = '<p>No seminars available.</p>';
+          }
+        })
+        .catch(error => {
+          console.error('Error fetching seminars:', error);
+        });
+    }
+
+    // Function to truncate the seminar title and add ellipsis if it's too long
+    function truncateTitle(title, maxLength) {
+      if (title.length > maxLength) {
+        return title.substring(0, maxLength) + '...';
+      } else {
+        return title;
+      }
+    }
+
+    
+    function checkLoginAndPostWorkshop() {
+            const userLoggedIn = localStorage.getItem('userLoggedIn');
+
+            if (!userLoggedIn) {
+                alert('Please log in to post a workshop.');
+                localStorage.setItem('redirectAfterLogin', 'post_workshop.html');
+                window.location.href = 'login.html';
+                            } 
+                else {
+                window.location.href = 'postworkshop.html';
+            }
+        }
+        function displayWorkshops() {
+            fetch("/get_workshops") // Replace with your server URL
+                .then(response => response.json())
+                .then(data => {
+                    const workshopList = document.getElementById("workshop-list");
+                    workshopList.innerHTML = ""; // Clear existing content
+
+                    if (data.success && data.workshops.length > 0) {
+                        data.workshops.forEach(workshop => {
+                            const workshopDiv = document.createElement("div");
+                            workshopDiv.classList.add("workshop-item");
+                            workshopDiv.innerHTML = `
+                                <h3>${workshop.workshopName}</h3>
+                                <p><strong>Date:</strong> ${new Date(workshop.workshopDate).toLocaleDateString()}</p>
+                                <p><strong>College:</strong> ${workshop.college}</p>
+                                <p><strong>Venue:</strong> ${workshop.venue}</p>
+                                <p><strong>Registration Link:</strong> <a href="${workshop.registrationLink}" target="_blank">Register Here</a></p>
+                                <p><strong>Registration Amount:</strong> ₹${workshop.registrationAmount}</p>
+                            `;
+                            workshopList.appendChild(workshopDiv);
+                        });
+                    } else {
+                        workshopList.innerHTML = "<p>No workshops available.</p>";
+                    }
+                })
+                .catch(error => {
+                    console.error("Error fetching workshops:", error);
+                    alert("Failed to fetch workshops. Please try again later.");
+                });
+        }
+        // Call displayWorkshops when the page loads or when a button is clicked
+        displayWorkshops();
+
+    const loginLogoutLink = document.getElementById('loginLogoutLink');
+
+        function checkLoginStatus() {
+            const username = localStorage.getItem('username');
+            if (username) {
+                loginLogoutLink.textContent = username + ' (Logout)';
+                loginLogoutLink.href = '#';
+                loginLogoutLink.onclick = logout;
+            } else {
+                loginLogoutLink.textContent = 'Login';
+                loginLogoutLink.href = 'login.html';
+                loginLogoutLink.onclick = null;
+            }
+        }
+
+
+  </script>
+</body>
+</html>

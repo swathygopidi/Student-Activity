@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Post Seminar Details</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  
+  <div class="container">
+    <h1>Post Seminar Details</h1>
+    <center>
+    <form action="#" method="post" enctype="multipart/form-data">
+      <div class="form-group">
+        <label for="college-name">College Name:</label>
+        <input type="text" id="college-name" name="college_name" required>
+      </div>
+
+      <div class="form-group">
+        <label for="seminar-topic">Topic of Seminar:</label>
+        <input type="text" id="seminar-topic" name="seminar_topic" required>
+      </div>
+
+      <div class="form-group">
+        <label for="seminar-category">Category of Seminar:</label>
+        <select id="seminar-category" name="seminar_category" required>
+          <option value="sciences">Sciences</option>
+          <option value="technology">Technology</option>
+          <option value="web-development">Web Development</option>
+          <option value="robotics">Robotics</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="seminar-date">Date of Seminar:</label>
+        <input type="date" id="seminar-date" name="seminar_date" required>
+      </div>
+
+      <div class="form-group">
+        <label for="seminar-venue">Venue of Seminar:</label>
+        <input type="text" id="seminar-venue" name="seminar_venue" required>
+      </div>
+
+      <div class="form-group">
+        <label for="brochure">Brochure (PDF):</label>
+        <input type="file" id="brochure" name="brochure" accept=".pdf" required>
+      </div>
+
+      <div class="form-group">
+        <label for="seminar-image">Seminar Image:</label>
+        <input type="file" id="seminar-image" name="seminar_image" accept="image/*" required>
+      </div>
+
+      <button type="submit" class="btn">Submit Seminar Details</button>
+    </form>
+  </center>
+    
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Student Activities Portal. All rights reserved.</p>
+  </footer>
+</body>
+<script>
+    // Handle form submission
+    document.querySelector("form").addEventListener("submit", function (event) {
+      event.preventDefault(); // Prevent the default form submission behavior
+  
+      // Create a FormData object to send form data (including file uploads)
+      const formData = new FormData(this);
+  
+      // Send the form data to the server using Fetch API
+      fetch('/post-seminar', {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          // If submission is successful, populate the latest seminar in the seminars section
+          loadLatestSeminar();
+          alert("Seminar details submitted successfully!");
+        } else {
+          alert("Error submitting seminar details.");
+        }
+      })
+      .catch(error => {
+        console.error("Error:", error);
+        alert("Error submitting seminar details.");
+      });
+    });
+  
+    // Function to fetch and display the latest seminar
+    function loadLatestSeminar() {
+      fetch('/get-latest-seminar')
+        .then(response => response.json())
+        .then(data => {
+          const seminarList = document.getElementById('seminar-list');
+          const latestSeminar = data.seminar;
+  
+          // Clear existing seminar list
+          seminarList.innerHTML = '';
+  
+          // Create a new div to display the latest seminar
+          const seminarDiv = document.createElement('div');
+          seminarDiv.classList.add('seminar-item');
+          seminarDiv.innerHTML = `
+            <h3>${latestSeminar.topic}</h3>
+            <p><strong>College:</strong> ${latestSeminar.college_name}</p>
+            <p><strong>Category:</strong> ${latestSeminar.seminar_category}</p>
+            <p><strong>Date:</strong> ${new Date(latestSeminar.seminar_date).toLocaleDateString()}</p>
+            <p><strong>Venue:</strong> ${latestSeminar.seminar_venue}</p>
+            <a href="/uploads/${latestSeminar.brochure}" target="_blank">Download Brochure</a>
+            <img src="/uploads/${latestSeminar.seminar_image}" alt="Seminar Image" style="width: 100px; height: 100px;">
+          `;
+          seminarList.appendChild(seminarDiv);
+        })
+        .catch(error => {
+          console.error('Error fetching the latest seminar:', error);
+        });
+    }
+  
+    // Load the latest seminar when the page is loaded
+    document.addEventListener('DOMContentLoaded', loadLatestSeminar);
+  </script>
+  
+</html>

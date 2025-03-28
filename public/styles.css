@@ -1,0 +1,482 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f4f4f4;
+  }
+  
+  header {
+    background-color: #333;
+    color: #fff;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  header .logo h1 {
+    font-size: 24px;
+  }
+  
+  nav ul {
+    display: flex;
+    list-style: none;
+  }
+  
+  nav ul li {
+    margin-right: 20px;
+  }
+  
+  nav ul li a {
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  .auth .btn {
+    background-color: #f1c40f;
+    color: #333;
+    padding: 8px 16px;
+    text-decoration: none;
+    border-radius: 4px;
+    margin-left: 10px;
+  }
+  
+  .auth .btn:hover {
+    background-color: #e0b90f;
+  }
+  
+  .hero {
+    background: #2c3e50;
+    color: #fff;
+    text-align: center;
+    padding: 50px 20px;
+  }
+  
+  .hero h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+  }
+  
+  .hero .btn {
+    background-color: #f1c40f;
+    color: #333;
+    padding: 10px 20px;
+    border-radius: 4px;
+    text-decoration: none;
+  }
+  
+  section {
+    padding: 40px 20px;
+    margin-top: 30px;
+  }
+  
+  section h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .events {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+  }
+  
+  .event-card, .post {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 20px;
+    width: 45%;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .event-card h3, .post h3 {
+    margin-bottom: 10px;
+  }
+  
+  .event-card p, .post p {
+    margin-bottom: 15px;
+  }
+  
+  .event-card a, .post a {
+    color: #3498db;
+    text-decoration: none;
+  }
+  
+  .event-card a:hover, .post a:hover {
+    text-decoration: underline;
+  }
+  
+  footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #333;
+    color: #fff;
+    margin-top: 40px;
+  }
+    body {
+      background-image: url('img.jpg');
+      background-size: cover;
+      background-position: center;
+    }
+    
+.login-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-form {
+  background-color: white;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  text-align: center;
+}
+
+h2 {
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+label {
+  font-size: 14px;
+  text-align: left;
+}
+
+input {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+button {
+  padding: 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+p {
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+a {
+  text-decoration: none;
+  color: #4CAF50;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+signup-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.signup-form {
+  background-color: white;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  text-align: center;
+}
+
+h2 {
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+label {
+  font-size: 14px;
+  text-align: left;
+}
+
+input {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+button {
+  padding: 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+p {
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+a {
+  text-decoration: none;
+  color: #4CAF50;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+signup-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.signup-form {
+  background-color: white;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  text-align: center;
+}
+
+h2 {
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+label {
+  font-size: 14px;
+  text-align: left;
+}
+
+input {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+button {
+  padding: 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+p {
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+a {
+  text-decoration: none;
+  color: #4CAF50;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.left-side {
+  width: 20%;
+  padding-right: 10px; /* Spacing between image and text */
+}
+
+.left-side img {
+  width: 20%; /* Makes the image fill the left side */
+  height: auto; /* Keep the image aspect ratio */
+  border-radius: 8px; /* Optional, adds rounded corners */
+}
+.naac-marquee-container {
+  width: 100%;
+  overflow: hidden; /* Hide the overflowing content */
+  position: relative;
+  
+}
+
+/* Style the logo and apply animation */
+.naac-marquee {
+  height: 80px; /* Set the height of the logo */
+  animation: marquee 10s linear infinite; /* Animate the logo horizontally */
+}
+
+/* Keyframes for scrolling animation */
+@keyframes marquee {
+  0% {
+      transform: translateX(100%); /* Start from the right side */
+  }
+  100% {
+      transform: translateX(-100%); /* Move to the left side */
+  }
+}
+* Styling for the seminar section */
+    #seminars {
+      padding: 20px;
+      background-color: #f4f4f4;
+      margin-top: 30px;
+    }
+
+    #seminar-list {
+      max-height: 400px; /* Set the maximum height for the scrollable area */
+      overflow-y: auto; /* Allow vertical scrolling */
+      border: 1px solid #ddd;
+      padding: 10px;
+      background-color: white;
+      border-radius: 8px;
+    }
+
+    .seminar-item {
+      padding: 10px;
+      border-bottom: 1px solid #ccc;
+    }
+
+    .seminar-item h3 {
+      font-size: 18px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      width: 100%; /* Ensure it spans full width */
+      display: block;
+      max-width: 300px; /* Adjust based on your content */
+    }
+
+    /* Scroll bar styling */
+    #seminar-list::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    #seminar-list::-webkit-scrollbar-thumb {
+      background: #888;
+      border-radius: 10px;
+    }
+
+    #seminar-list::-webkit-scrollbar-thumb:hover {
+      background: #555;
+    }
+
+/* Dropdown styles */
+.dropdown {
+  position: relative;
+}
+
+.dropdown-content {
+  display: none; /* Hide the submenu */
+  position: absolute;
+  background-color: #333;
+  min-width: 160px;
+  z-index: 1;
+}
+
+.dropdown-content li {
+  padding: 8px 16px;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block; /* Show the submenu when hovering over the parent */
+}
+
+/* Optionally, add a hover effect on menu items */
+.dropdown-content li:hover {
+  background-color: #444;
+}
+
+.auth {
+  margin-left: auto;
+}
+
+label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
+  text-align: center;
+  display:inline;
+}
+
+input[type="text"], input[type="date"], select, input[type="file"] {
+  width: 18%;
+  padding: 10px;
+  margin: 5px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  text-align:left;
+  display:inline;
+}
+
+button[type="submit"] {
+  width: 30%;
+  padding: 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  display: inline;
+}
+
+button[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+footer {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 14px;
+  color: #777;
+}
+.header .logo .h1{
+  text-align:center;
+}
